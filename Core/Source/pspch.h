@@ -26,6 +26,7 @@
 
 #include "PulseStudio/Core.h"
 #include "PulseStudio/Log.h"
+#include "PulseStudio/Theme.h"
 
 #include "PulseStudio/KeyCodes.h"
 #include "PulseStudio/MouseButtonCodes.h"

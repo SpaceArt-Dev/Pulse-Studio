@@ -46,7 +46,9 @@ namespace PulseStudio {
         }
         LOG_INFO("Application constructor called.");
 
-        WindowProps props("Pulse Studio", 1700, 1000);
+        ThemeManager::SetTheme(Theme::Sand);
+
+        WindowProps props("Pulse Studio", 1720, 1000);
         m_MainWindow = std::unique_ptr<Window>(Window::Create(props));
 		m_MainWindow->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
@@ -90,25 +92,52 @@ namespace PulseStudio {
     {
         LOG_TRACE("Pulse Studio initialized and running.");
 
-        // Draw a Titlebar with a close button in the top right corner
-        float vertices[] =
-        {
-            // positions         // colors
-             0.9f,  0.9f, 0.0f,  1.0f, 0.0f, 0.0f, // top right
-             0.8f,  0.9f, 0.0f,  1.0f, 0.0f, 0.0f, // top left
-             0.8f,  0.8f, 0.0f,  1.0f, 0.0f, 0.0f, // bottom left
-             0.9f,  0.8f, 0.0f,  1.0f, 0.0f, 0.0f  // bottom right
-        };
-
         do 
         {
-            glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-            glClear(GL_COLOR_BUFFER_BIT);
-            
-            glEnableClientState(GL_VERTEX_ARRAY);
-            glVertexPointer(2, GL_FLOAT, 0, vertices);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
-            glDisableClientState(GL_VERTEX_ARRAY);
+            if (ThemeManager::GetCurrentTheme() == Theme::Dark)
+            {
+                glClearColor(0.0f, 0.0f, 0.1f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Light)
+            {
+                glClearColor(0.9f, 0.9f, 0.95f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Breeze)
+            {
+                glClearColor(0.8f, 0.9f, 0.95f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Slate)
+            {
+                glClearColor(0.110f, 0.208f, 0.306f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Icy_Mint)
+            {
+                glClearColor(0.8f, 0.9f, 0.93f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Moonlight)
+            {
+                glClearColor(0.1f, 0.15f, 0.27f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Forest)
+            {
+                glClearColor(0.07f, 0.2f, 0.1f, 1);
+                glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else if (ThemeManager::GetCurrentTheme() == Theme::Sand)
+            {
+				glClearColor(0.95f, 0.9f, 0.7f, 1);
+				glClear(GL_COLOR_BUFFER_BIT);
+            }
+            else
+            {
+                PS_ERROR("Unknow this theme!");
+            }
 
             for (Layer* layer : m_LayerStack)
                 if (layer)
@@ -125,7 +154,7 @@ namespace PulseStudio {
             }
 
 			// Add a small sleep to prevent high CPU usage
-            std::this_thread::sleep_for(std::chrono::milliseconds(16));
+            //std::this_thread::sleep_for(std::chrono::milliseconds(16));
         } while (m_Running);
     }
 

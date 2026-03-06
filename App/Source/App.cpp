@@ -13,17 +13,10 @@ public:
 
 	void OnUpdate(float deltaTime) override
 	{
-		if (PulseStudio::Input::IsKeyPressed(PS_KEY_TAB))
-			PS_TRACE("Tab key is pressed (polling).");
 	}
 
 	void OnEvent(PulseStudio::Event& event) override
 	{
-		if (event.GetEventType() == PulseStudio::EventType::KeyPressed)
-		{
-			PulseStudio::KeyPressedEvent& e = (PulseStudio::KeyPressedEvent&)event;
-			PS_TRACE(std::format("{0}", (char)e.GetKeyCode()));
-		}
 	}
 };
 
@@ -43,10 +36,16 @@ PulseStudio::Application* PulseStudio::CreateApplication()
 	return new SandboxApp();
 }
 
-static void ChangeConsoelStatus(bool IsShow)
+enum ConsoleStatus
+{
+	Show,
+	Hide
+};
+
+static void ChangeConsoleStatus(ConsoleStatus status)
 {
 	HWND hwnd = GetConsoleWindow();
-	if (IsShow)
+	if (status == ConsoleStatus::Show)
 	{
 		ShowWindow(hwnd, SW_SHOW); // Show Console
 		PS_INFO("Console is Showed.");
@@ -60,13 +59,9 @@ static void ChangeConsoelStatus(bool IsShow)
 
 int main()
 {
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-
-	ChangeConsoelStatus(true);
+	ChangeConsoleStatus(ConsoleStatus::Show);
 
 	PulseStudio::Application* app = PulseStudio::CreateApplication();
-
-	std::cout.setf(std::ios::unitbuf);
 
 	app->Run();
 

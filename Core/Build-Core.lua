@@ -17,7 +17,7 @@ project "Core"
         "vendor/Glad/include",
         "vendor/glm",
         "vendor/stb_image",
-        "vendor/Freetype/include"
+        "vendor/imgui"
     }
     
     defines
@@ -29,12 +29,12 @@ project "Core"
     
     links
     {
-         "GLFW",
-         "Glad",
-         "GLM",
-        --  "Freetype",
-         "Image",
-         "opengl32.lib"
+        "GLFW",
+        "Glad",
+        "GLM",
+        "ImGui",
+        "Image",
+        "opengl32.lib"
     }
     
     targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
