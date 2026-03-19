@@ -1,2 +1,2 @@
 # Pulse-Studio
-Pulse Studio IDE
+A great IDE
