@@ -10,23 +10,22 @@ project "App"
    includedirs
    {
       "Source",
-	  "../Core/Source",
+      "../Core/Source",
       "../Core/vendor/GLFW/include",
-      "../Core/vendor/Glad/include",
-      "../Core/vendor/JSON/include"
+      "../Core/vendor/Glad/include"
    }
 
-   links
-   {
-      "Core"
-   }
+   links { "Core" }
 
    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
    objdir ("../Binaries-Intermediates/" .. OutputDir .. "/%{prj.name}")
 
    filter "system:windows"
        systemversion "latest"
-       defines { "WINDOWS" }
+       defines { "WINDOWS", "PS_PLATFORM_WINDOWS" }
+
+   filter "system:linux"
+       defines { "PS_PLATFORM_LINUX" }
 
    filter "configurations:Debug"
        defines { "DEBUG" }

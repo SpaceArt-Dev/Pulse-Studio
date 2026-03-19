@@ -17,33 +17,33 @@ project "Core"
         "vendor/Glad/include",
         "vendor/glm",
         "vendor/stb_image",
-        "vendor/imgui"
+        "vendor/wxWidgets/include"
     }
     
     defines
     {
-        "PS_PLATFORM_WINDOWS",
         "PS_ENABLE_ASSERTS",
         "GLFW_INCLUDE_NONE"
     }
     
-    links
-    {
-        "GLFW",
-        "Glad",
-        "GLM",
-        "ImGui",
-        "Image",
-        "opengl32.lib"
-    }
+    filter "system:windows"
+        links { "GLFW", "Glad", "GLM", "Image", "opengl32.lib" }
+        defines { "PS_PLATFORM_WINDOWS", "_UNICODE" }
     
-    targetdir ("../Binaries/" .. OutputDir .. "/%{prj.name}")
-    objdir ("../Binaries-Intermediates/" .. OutputDir .. "/%{prj.name}")
+    filter "system:linux"
+        buildoptions { "`pkg-config --cflags glfw3`" }
+        linkoptions { "`pkg-config --libs glfw3`" }
+        links { "GL", "dl" }
+        defines { "PS_PLATFORM_LINUX" }
+    
+    filter {}
+    
+    targetdir ("%{wks.location}/Binaries/" .. OutputDir .. "/%{prj.name}")
+    objdir ("%{wks.location}/Binaries-Intermediates/" .. OutputDir .. "/%{prj.name}")
     
     filter "system:windows"
         systemversion "latest"
         buildoptions { "/utf-8" }
-        defines { }
     
     filter "configurations:Debug"
         defines { "DEBUG" }

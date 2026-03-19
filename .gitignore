@@ -2,8 +2,6 @@
 .vs/
 Binaries/
 Binaries-Intermediates/
-Core/vendor/Binaries/
-Core/vendor/Binaries-Intermediates/
 
 # Files
 *.vcxproj
@@ -12,9 +10,7 @@ Core/vendor/Binaries-Intermediates/
 *.sln
 *.log
 *.lnk
-Icon.txt
 TODO.txt
-*.png
 Makefile
 
 # Exclude

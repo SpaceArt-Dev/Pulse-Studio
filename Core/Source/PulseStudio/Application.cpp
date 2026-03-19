@@ -46,7 +46,7 @@ namespace PulseStudio {
         }
         LOG_INFO("Application constructor called.");
 
-        ThemeManager::SetTheme(Theme::Sand);
+        ThemeManager::SetTheme(Theme::Dark);
 
         WindowProps props("Pulse Studio", 1720, 1000);
         m_MainWindow = std::unique_ptr<Window>(Window::Create(props));
@@ -96,7 +96,7 @@ namespace PulseStudio {
         {
             if (ThemeManager::GetCurrentTheme() == Theme::Dark)
             {
-                glClearColor(0.0f, 0.0f, 0.1f, 1);
+                glClearColor(0.01f, 0.01f, 0.07f, 1);
                 glClear(GL_COLOR_BUFFER_BIT);
             }
             else if (ThemeManager::GetCurrentTheme() == Theme::Light)
@@ -152,9 +152,6 @@ namespace PulseStudio {
                 PS_CORE_ERROR("Main window is null!");
                 m_Running = false;
             }
-
-			// Add a small sleep to prevent high CPU usage
-            //std::this_thread::sleep_for(std::chrono::milliseconds(16));
         } while (m_Running);
     }
 
