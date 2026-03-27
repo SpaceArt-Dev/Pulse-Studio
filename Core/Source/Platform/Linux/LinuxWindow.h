@@ -23,6 +23,7 @@ namespace PulseStudio {
 
         inline virtual void* GetNativeWindow() const override { return m_Window; }
 
+        void SetUnsemi_transparency(unsigned int value);
     private:
         void Init(const WindowProps& props);
         void Shutdown();

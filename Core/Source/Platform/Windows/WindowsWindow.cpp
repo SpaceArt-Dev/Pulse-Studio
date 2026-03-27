@@ -1,7 +1,11 @@
 #include "pspch.h"
 #include "WindowsWindow.h"
 
+#ifdef PS_PLATFORM_WINDOWS
+#define GLFW_EXPOSE_NATIVE_WIN32
+#endif
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h> 
 #include <glad/glad.h>
 
 #include "PulseStudio/Log.h"
@@ -188,5 +192,17 @@ namespace PulseStudio {
     {
         return m_Window;
     }
+
+    void WindowsWindow::SetUnsemi_transparency(unsigned int value)
+    {
+#ifdef PS_PLATFORM_WINDOWS
+        m_Data.unsemi_transparency = value;
+    
+        HWND hwnd = glfwGetWin32Window(m_Window);
+
+        SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
+        SetLayeredWindowAttributes(hwnd, 0, value, LWA_ALPHA);
+#endif
+	}
 
 }

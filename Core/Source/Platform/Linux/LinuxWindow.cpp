@@ -1,8 +1,17 @@
 #include "pspch.h"
 #include "LinuxWindow.h"
 
+#ifdef PS_PLATFORM_LINUX
+#define GLFW_EXPOSE_NATIVE_X11
+#endif
 #include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 #include <glad/glad.h>
+
+#ifdef PS_PLATFORM_LINUX
+    #include <X11/Xlib.h>
+    #include <X11/Xatom.h>
+#endif
 
 #include "PulseStudio/Log.h"
 #include "PulseStudio/Events/ApplicationEvent.h"
@@ -159,4 +168,26 @@ namespace PulseStudio {
     }
 
     bool LinuxWindow::IsVSync() const { return m_Data.VSync; }
+
+    void LinuxWindow::SetUnsemi_transparency(unsigned int value)
+    {
+#ifdef PS_PLATFORM_LINUX
+        m_Data.unsemi_transparency = value;
+
+        Display* display = glfwGetX11Display();
+        Window x11Window = glfwGetX11Window(m_Window);
+        if (!display || !x11Window) return;
+
+        unsigned long Value = (unsigned long)(value * 0xFFFFFFFF);
+
+        Atom atom = XInternAtom(display, "_NET_WM_WINDOW_OPACITY", False);
+        if (atom != None)
+        {
+            XChangeProperty(display, x11Window, atom, XA_CARDINAL, 32,
+                PropModeReplace, (unsigned char*)&Value, 1);
+            XFlush(display);
+        }
+#endif
+    }
+
 }

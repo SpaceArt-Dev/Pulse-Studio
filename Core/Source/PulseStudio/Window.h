@@ -35,6 +35,8 @@ namespace PulseStudio {
 
 		virtual void* GetNativeWindow() const = 0;
 
+		virtual void SetUnsemi_transparency(unsigned int value) = 0;
+
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
 }

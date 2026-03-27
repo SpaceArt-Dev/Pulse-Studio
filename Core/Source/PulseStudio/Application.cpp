@@ -1,10 +1,13 @@
 #include "pspch.h"
 
+#define GLFW_EXPOSE_NATIVE_WIN32
 #include "Application.h"
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Window.h"
 
+#include <GLFW/glfw3.h>
+#include <GLFW/glfw3native.h>
 #include <glad/glad.h>
 
 #include "Input.h"
@@ -87,6 +90,75 @@ namespace PulseStudio {
                 break;
         }
 	}
+	
+	static bool SetGLFWColor()
+	{
+        if (ThemeManager::GetCurrentTheme() == Theme::Dark)
+        {
+            glClearColor(0.01f, 0.01f, 0.07f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Light)
+        {
+            glClearColor(0.9f, 0.9f, 0.95f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Breeze)
+        {
+            glClearColor(0.8f, 0.9f, 0.95f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Slate)
+        {
+            glClearColor(0.110f, 0.208f, 0.306f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Icy_Mint)
+        {
+            glClearColor(0.8f, 0.9f, 0.85f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Moonlight)
+        {
+            glClearColor(0.1f, 0.15f, 0.27f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Forest)
+        {
+            glClearColor(0.07f, 0.2f, 0.1f, 1);
+            glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Sand)
+        {
+			glClearColor(0.95f, 0.9f, 0.7f, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+        }
+        else if (ThemeManager::GetCurrentTheme() == Theme::Ice)
+        {
+			glClearColor(0.85f, 0.85f, 0.9f, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+		}
+        else if (ThemeManager::GetCurrentTheme() == Theme::Grape)
+        {
+			glClearColor(0.2f, 0.0f, 0.3f, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+            return true;
+		}
+        else
+        {
+            PS_ERROR("Unknow this theme!");
+            return false;
+        }
+	}
 
     void Application::Run()
     {
@@ -94,50 +166,7 @@ namespace PulseStudio {
 
         do 
         {
-            if (ThemeManager::GetCurrentTheme() == Theme::Dark)
-            {
-                glClearColor(0.01f, 0.01f, 0.07f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Light)
-            {
-                glClearColor(0.9f, 0.9f, 0.95f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Breeze)
-            {
-                glClearColor(0.8f, 0.9f, 0.95f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Cool_Slate)
-            {
-                glClearColor(0.110f, 0.208f, 0.306f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Icy_Mint)
-            {
-                glClearColor(0.8f, 0.9f, 0.93f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Moonlight)
-            {
-                glClearColor(0.1f, 0.15f, 0.27f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Forest)
-            {
-                glClearColor(0.07f, 0.2f, 0.1f, 1);
-                glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else if (ThemeManager::GetCurrentTheme() == Theme::Sand)
-            {
-				glClearColor(0.95f, 0.9f, 0.7f, 1);
-				glClear(GL_COLOR_BUFFER_BIT);
-            }
-            else
-            {
-                PS_ERROR("Unknow this theme!");
-            }
+			SetGLFWColor();
 
             for (Layer* layer : m_LayerStack)
                 if (layer)
@@ -145,6 +174,7 @@ namespace PulseStudio {
 
             if (m_MainWindow)
             {
+                m_MainWindow->SetUnsemi_transparency(unsemi_transparency);
                 m_MainWindow->OnUpdate();
             }
             else

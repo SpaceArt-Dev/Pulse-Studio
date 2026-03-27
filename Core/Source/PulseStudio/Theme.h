@@ -3,18 +3,20 @@
 namespace PulseStudio
 {
 
-	enum class Theme
+	enum class Theme // 10 items
 	{
 		// Light
 		Light = 0,
 		Cool_Breeze,
 		Icy_Mint,
 		Sand,
+		Ice,
 		// Dark
 		Dark,
 		Cool_Slate,
 		Moonlight,
-		Forest
+		Forest,
+		Grape
 	};
 
 	class ThemeManager

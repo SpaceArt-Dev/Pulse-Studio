@@ -10,8 +10,11 @@ namespace PulseStudio {
     Window* Window::Create(const WindowProps& props)
     {
 #ifdef PS_PLATFORM_WINDOWS
-        LOG_TRACE("Creating window...");
+        LOG_TRACE("Creating Windows window...");
         return new WindowsWindow(props);
+#elif defined(PS_PLATFORM_LINUX)
+        LOG_TRACE("Creating Linux window...");
+        return new LinuxWindow(props);
 #else
         PS_CORE_ERROR("Pulse Studio IDE unsupported the platform!");
         return nullptr;
