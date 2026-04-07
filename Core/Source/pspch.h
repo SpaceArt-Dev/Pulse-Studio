@@ -23,6 +23,7 @@
 #include <fstream>
 #include <mutex>
 #include <iomanip>
+#include <format>
 
 #include "PulseStudio/Core.h"
 #include "PulseStudio/Log.h"

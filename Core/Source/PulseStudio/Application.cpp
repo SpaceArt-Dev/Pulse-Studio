@@ -5,6 +5,7 @@
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Window.h"
+#include "ui/uiWindow.h"
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
@@ -49,13 +50,15 @@ namespace PulseStudio {
         }
         LOG_INFO("Application constructor called.");
 
-        ThemeManager::SetTheme(Theme::Dark);
+        ThemeManager::SetTheme(Theme::Cool_Slate);
 
         WindowProps props("Pulse Studio", 1720, 1000);
         m_MainWindow = std::unique_ptr<Window>(Window::Create(props));
 		m_MainWindow->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
         Input::Init();
+
+        m_MusicPlayer = std::make_unique<MusicPlayer>();
     }
 
     Application::~Application()
@@ -101,7 +104,7 @@ namespace PulseStudio {
         }
         else if (ThemeManager::GetCurrentTheme() == Theme::Light)
         {
-            glClearColor(0.9f, 0.9f, 0.95f, 1);
+            glClearColor(0.95f, 0.95f, 1.0f, 1);
             glClear(GL_COLOR_BUFFER_BIT);
             return true;
         }
@@ -162,7 +165,8 @@ namespace PulseStudio {
 
     void Application::Run()
     {
-        LOG_TRACE("Pulse Studio initialized and running.");
+        PS_TRACE("Pulse Studio initialized and running.");
+        PS_DEBUG("Hello from Pulse-Studio!");
 
         do 
         {
@@ -171,6 +175,8 @@ namespace PulseStudio {
             for (Layer* layer : m_LayerStack)
                 if (layer)
                     layer->OnUpdate(0.0f);
+
+            m_MusicPlayer->OnUpdate(0.0f);
 
             if (m_MainWindow)
             {

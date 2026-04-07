@@ -50,8 +50,8 @@ namespace PulseStudio {
 	public:
 		inline int GetMouseButton() const { return m_Button; }
 		inline const glm::vec2& GetMousePosition() const { return m_MousePosition; }
-		float GetMouseX() const { return m_MouseX; }
-		float GetMouseY() const { return m_MouseY; }
+		float GetMouseX() const { return m_MousePosition.x; }
+		float GetMouseY() const { return m_MousePosition.y; }
 
 		EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput | EventCategoryMouseButton)
 	protected:
@@ -60,8 +60,6 @@ namespace PulseStudio {
 
 		int m_Button;
 		glm::vec2 m_MousePosition;
-		float m_MouseX = 0.0f;
-		float m_MouseY = 0.0f;
 	};
 
 	class MouseButtonPressedEvent : public MouseButtonEvent
@@ -69,8 +67,6 @@ namespace PulseStudio {
 	public:
 		MouseButtonPressedEvent(int button, float mouseX = 0.0f, float mouseY = 0.0f)
 			: MouseButtonEvent(button, mouseX, mouseY) {}
-		float GetMouseX() const { return m_MouseX; }
-		float GetMouseY() const { return m_MouseY; }
 
 		std::string ToString() const override
 		{
@@ -80,9 +76,6 @@ namespace PulseStudio {
 		}
 
 		EVENT_CLASS_TYPE(MouseButtonPressed)
-	private:
-		float m_MouseX = 0.0f;
-		float m_MouseY = 0.0f;
 	};
 
 	class MouseButtonReleasedEvent : public MouseButtonEvent

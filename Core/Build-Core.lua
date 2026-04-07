@@ -16,7 +16,8 @@ project "Core"
         "vendor/GLFW/include",
         "vendor/Glad/include",
         "vendor/glm",
-        "vendor/stb_image"
+        "vendor/stb_image",
+        "vendor/miniaudio"
     }
     
     defines
@@ -33,7 +34,7 @@ project "Core"
     }
     
     filter "system:windows"
-        links { "GLFW", "Glad", "GLM", "Image", "opengl32.lib" }
+        links { "GLFW", "Glad", "GLM", "Image", "opengl32.lib", "winmm", "ole32" }
         defines { "PS_PLATFORM_WINDOWS" }
         systemversion "latest"
         buildoptions { "/utf-8" }

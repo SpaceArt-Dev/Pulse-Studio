@@ -55,7 +55,7 @@ namespace PulseStudio {
 
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
-        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
         // glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
@@ -113,18 +113,23 @@ namespace PulseStudio {
         glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window, int button, int action, int mods)
             {
                 WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+                double xpos, ypos;
+                glfwGetCursorPos(window, &xpos, &ypos);
+
                 switch (action)
                 {
                 case GLFW_PRESS:
                 {
-                    MouseButtonPressedEvent event(button);
-                    if (data.EventCallback) data.EventCallback(event);
+                    MouseButtonPressedEvent event(button, xpos, ypos);
+                    if (data.EventCallback)
+                        data.EventCallback(event);
                     break;
                 }
                 case GLFW_RELEASE:
                 {
-                    MouseButtonReleasedEvent event(button);
-                    if (data.EventCallback) data.EventCallback(event);
+                    MouseButtonReleasedEvent event(button, xpos, ypos);
+                    if (data.EventCallback)
+                        data.EventCallback(event);
                     break;
                 }
                 }

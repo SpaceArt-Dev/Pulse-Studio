@@ -4,6 +4,7 @@
 #include "Events/ApplicationEvent.h"
 #include "Window.h"
 #include "LayerStack.h"
+#include "MusicPlayer.h"
 
 namespace PulseStudio {
 
@@ -29,7 +30,9 @@ namespace PulseStudio {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
-		int unsemi_transparency = 200;
+		int unsemi_transparency = 250;
+
+		std::unique_ptr<MusicPlayer> m_MusicPlayer;
 	};
 
 	// To be defined in CLIENT 

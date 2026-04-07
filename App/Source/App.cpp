@@ -26,6 +26,7 @@ public:
 	SandboxApp()
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new PulseStudio::uiLayer());
 	}
 	~SandboxApp()
 	{
