@@ -1,7 +1,7 @@
 project "Core"
     kind "StaticLib"
     language "C++"
-    cppdialect "C++23"
+    cppdialect "C++20"
     targetdir "Binaries/%{cfg.buildcfg}"
     staticruntime "off"
     
@@ -17,7 +17,8 @@ project "Core"
         "vendor/Glad/include",
         "vendor/glm",
         "vendor/stb_image",
-        "vendor/miniaudio"
+        "vendor/miniaudio",
+        "vendor/spdlog/include"
     }
     
     defines

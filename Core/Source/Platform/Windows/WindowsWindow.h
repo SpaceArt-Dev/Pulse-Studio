@@ -30,7 +30,7 @@ namespace PulseStudio {
 
 		inline virtual void* GetNativeWindow() const override;
 
-		void SetUnsemi_transparency(unsigned int value) override;
+		void SetUnsemi_transparency(double value) override;
 	private:
 		GLFWwindow* m_Window;
 
@@ -39,7 +39,7 @@ namespace PulseStudio {
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
-			unsigned int unsemi_transparency;
+			double unsemi_transparency;
 
 			EventCallbackFn EventCallback;
 		};

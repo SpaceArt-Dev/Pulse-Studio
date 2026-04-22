@@ -7,6 +7,14 @@
 
 namespace PulseStudio {
 
+	enum class BackdropStyle
+	{
+		Solid,
+		Transparent,
+		Mica,
+		Acrylic
+	};
+
 	struct WindowProps
 	{
 		std::string Title;
@@ -35,7 +43,7 @@ namespace PulseStudio {
 
 		virtual void* GetNativeWindow() const = 0;
 
-		virtual void SetUnsemi_transparency(unsigned int value) = 0;
+		virtual void SetUnsemi_transparency(double value) = 0;
 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};

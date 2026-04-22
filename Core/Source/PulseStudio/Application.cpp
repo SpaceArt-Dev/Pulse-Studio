@@ -5,11 +5,17 @@
 #include "Events/ApplicationEvent.h"
 #include "Log.h"
 #include "Window.h"
-#include "ui/uiWindow.h"
+#include "ui/ui/uiWindow.h"
 
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
 #include <glad/glad.h>
+
+#ifdef PS_PLATFORM_WINDOWS
+#include "Platform/Windows/WindowsWindow.h"
+#else define PS_PLATFORM_LINUX
+#include "Platform/Linux/LinuxWindow.h"
+#endif
 
 #include "Input.h"
 
@@ -19,54 +25,27 @@ namespace PulseStudio {
 
 	Application* Application::s_Instance = nullptr;
 
-    bool createDirectoryIfNotExists(const std::string& path)
-    {
-        namespace fs = std::filesystem;
-
-        try 
-        {
-            if (!fs::exists(path))
-            {
-                return fs::create_directories(path);
-            }
-            return true;
-        }
-        catch (const fs::filesystem_error& ex)
-        {
-            std::cerr << ex.what() << std::endl;
-            return false;
-        }
-    }
-
 	Application::Application()
     {
 		PS_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 
-        // Initialize the logger in the constructor
-        if (createDirectoryIfNotExists("Logs"))
-        {
-            Logger::getInstance().init("Logs/PulseStudioLog.log", LogLevel::Debug, LogLevel::Debug);
-        }
-        LOG_INFO("Application constructor called.");
+		Log::Init();
+        PS_CORE_INFO("Initilized log!");
 
-        ThemeManager::SetTheme(Theme::Cool_Slate);
+        ThemeManager::SetTheme(Theme::Dark);
 
-        WindowProps props("Pulse Studio", 1720, 1000);
+        WindowProps props("Pulse-Studio Integrated Development Environment", 1720, 1000);
         m_MainWindow = std::unique_ptr<Window>(Window::Create(props));
 		m_MainWindow->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
         Input::Init();
-
-        m_MusicPlayer = std::make_unique<MusicPlayer>();
     }
 
     Application::~Application()
     {
-        LOG_INFO("Application destructor called.");
-		LOG_CORE_DEBUG("Shutting down Pulse Studio...");
-        // Shutdown the logger when the application is destroyed
-        Logger::getInstance().shutdown();
+        PS_INFO("Application destructor called.");
+		PS_CORE_WARN("Shutting down Pulse Studio...");
     }
 
     void Application::PushLayer(Layer* layer)
@@ -83,7 +62,7 @@ namespace PulseStudio {
 
     void Application::OnEvent(Event& e)
     {
-		LOG_CORE_INFO(e.ToString());
+		PS_CORE_TRACE(e.ToString());
         EventDispatcher dispatcher(e);
         dispatcher.Dispatch<WindowCloseEvent>(std::bind(&Application::OnWindowClose, this, std::placeholders::_1));
         for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); )
@@ -176,8 +155,6 @@ namespace PulseStudio {
                 if (layer)
                     layer->OnUpdate(0.0f);
 
-            m_MusicPlayer->OnUpdate(0.0f);
-
             if (m_MainWindow)
             {
                 m_MainWindow->SetUnsemi_transparency(unsemi_transparency);
@@ -188,12 +165,12 @@ namespace PulseStudio {
                 PS_CORE_ERROR("Main window is null!");
                 m_Running = false;
             }
-        } while (m_Running);
+        } while (m_Running && !glfwWindowShouldClose(static_cast<GLFWwindow*>(m_MainWindow->GetNativeWindow())));
     }
 
     bool Application::OnWindowClose(WindowCloseEvent& e) 
     {
-		LOG_WARN("Window close event received. Shutting down Application...");
+		PS_WARN("Window close event received. Shutting down Application...");
         m_Running = false;
         return true;
     }

@@ -24,6 +24,7 @@ namespace PulseStudio
 	public:
 		static Theme GetCurrentTheme() { return s_CurrentTheme; }
 		static void SetTheme(Theme theme) { s_CurrentTheme = theme; }
+		static bool IsDarkTheme() { return (s_CurrentTheme == Theme::Dark || s_CurrentTheme == Theme::Cool_Slate || s_CurrentTheme == Theme::Moonlight || s_CurrentTheme == Theme::Forest || s_CurrentTheme == Theme::Grape); }
 	private:
 		ThemeManager() = default;
 

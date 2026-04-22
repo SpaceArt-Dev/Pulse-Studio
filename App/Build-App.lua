@@ -9,10 +9,14 @@ project "App"
 
    includedirs
    {
-      "Source",
-      "../Core/Source",
-      "../Core/vendor/GLFW/include",
-      "../Core/vendor/Glad/include"
+        "Source",
+        "../Core/Source",
+        "../Core/vendor/GLFW/include",
+        "../Core/vendor/Glad/include",
+        "../Core/vendor/glm",
+        "../Core/vendor/stb_image",
+        "../Core/vendor/miniaudio",
+        "../Core/vendor/spdlog/include"
    }
 
    links { "Core" }
@@ -25,7 +29,7 @@ project "App"
        defines { "WINDOWS", "PS_PLATFORM_WINDOWS" }
 
    filter "system:linux"
-       defines { "PS_PLATFORM_LINUX" }
+       defines { "LINUX", "PS_PLATFORM_LINUX" }
 
    filter "configurations:Debug"
        defines { "DEBUG" }

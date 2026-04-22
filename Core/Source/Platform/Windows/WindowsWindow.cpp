@@ -4,6 +4,7 @@
 #ifdef PS_PLATFORM_WINDOWS
 #define GLFW_EXPOSE_NATIVE_WIN32
 #endif
+
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h> 
 #include <glad/glad.h>
@@ -47,7 +48,7 @@ namespace PulseStudio {
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_COMPAT_PROFILE);
-        // glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
+        glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
         m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
         glfwMakeContextCurrent(m_Window);
@@ -195,7 +196,7 @@ namespace PulseStudio {
         return m_Window;
     }
 
-    void WindowsWindow::SetUnsemi_transparency(unsigned int value)
+    void WindowsWindow::SetUnsemi_transparency(double value)
     {
 #ifdef PS_PLATFORM_WINDOWS
         m_Data.unsemi_transparency = value;
@@ -203,7 +204,7 @@ namespace PulseStudio {
         HWND hwnd = glfwGetWin32Window(m_Window);
 
         SetWindowLong(hwnd, GWL_EXSTYLE, GetWindowLong(hwnd, GWL_EXSTYLE) | WS_EX_LAYERED);
-        SetLayeredWindowAttributes(hwnd, 0, value, LWA_ALPHA);
+        SetLayeredWindowAttributes(hwnd, 0, (value * 255), LWA_ALPHA);
 #endif
 	}
 

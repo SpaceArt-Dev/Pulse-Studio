@@ -1,3 +1,6 @@
 [submodule "Core/vendor/GLFW"]
 	path = Core/vendor/GLFW
 	url = https://www.github.com/TheCherno/glfw
+[submodule "Core/vendor/json"]
+	path = Core/vendor/json
+	url = https://github.com/nlohmann/json.git

@@ -15,8 +15,9 @@ public:
 	{
 	}
 
-	void OnEvent(PulseStudio::Event& event) override
+	bool OnEvent(PulseStudio::Event& event) override
 	{
+		return false;
 	}
 };
 

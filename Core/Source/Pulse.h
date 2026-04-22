@@ -6,7 +6,7 @@
 #include "PulseStudio/Log.h"
 #include "PulseStudio/Input.h"
 
-//UI
+// UI
 #include "PulseStudio/ui/uiLayer.h"
 
 // Codes
