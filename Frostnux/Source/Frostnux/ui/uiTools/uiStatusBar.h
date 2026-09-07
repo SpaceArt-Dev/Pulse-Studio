@@ -23,7 +23,7 @@ namespace Frostnux {
 		void DrawProgress();
 		void DrawChannel();
 
-		std::string m_StatusText = "Ready";
+		std::string m_StatusText;
 		std::string m_RightText = "";
 
 		float m_Progress = -1.0f;

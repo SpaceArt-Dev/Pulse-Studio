@@ -28,15 +28,15 @@ namespace Frostnux {
 			"alignas","alignof","and","and_eq", "auto","bitand","bitor","bool",
 			"char","char8_t","char16_t", "char32_t", "class","compl","concept",
 			"const", "consteval","constexpr","constinit", "const_cast", "decltype",
-			"delete", "double","dynamic_cast","enum", "explicit","export","extern",
+			"delete", "double", "dynamic_cast","enum", "explicit","export","extern",
 			"false","float", "friend","goto","import","inline", "int", "long",
 			"module","mutable","namespace", "new", "noexcept","not"," not_eq ",
-			"nullptr", "operator", " or "," or_eq ","private","protected", "public",
+			"nullptr", "operator", "or","or_eq","private","protected", "public",
 			"register","reinterpret_cast","requires", "short", "signed","sizeof",
 			"static", "static_assert","static_cast","struct","template", "this",
 			"thread_local","throw","true", "try","typedef","typeid","typename",
 			"union", "unsigned","using","virtual","void","volatile", "wchar_t",
-			" xor "," xor_eq "
+			"xor","xor_eq"
 		};
 		m_ControlKeywords = 
 		{

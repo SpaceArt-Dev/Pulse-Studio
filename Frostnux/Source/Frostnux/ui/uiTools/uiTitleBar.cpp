@@ -44,50 +44,65 @@ namespace Frostnux
 
 		float buttonHeight = 40.0f;
 
+		std::string Names[] = { "File", "Edit", "View", "Project", "Build", "Debug", "Tools", "Help", "Search"};
+		std::string path = "Resources/Languages/" + LanguageManager::GetLanguageCode() + ".json";
+		std::ifstream file(path);
+		nlohmann::json j;
+		file >> j;
+		Names[0] = j.value("File", "File");
+		Names[1] = j.value("Edit", "Edit");
+		Names[2] = j.value("View", "View");
+		Names[3] = j.value("Project", "Project");
+		Names[4] = j.value("Build", "Build");
+		Names[5] = j.value("Debug", "Debug");
+		Names[6] = j.value("Tools", "Tools");
+		Names[7] = j.value("Help", "Help");
+		Names[8] = j.value("Search", "Search");
+
 		// File
-		auto Filebtn = std::make_unique<uiButton>("File", x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Filebtn = std::make_unique<uiButton>(Names[0], x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Filebtn->SetCallback([=]() { FX_INFO("Clicked \"File\""); });
 		m_Buttons.push_back(std::move(Filebtn));
 		x += 80;
 
 		// Edit
-		auto Editbtn = std::make_unique<uiButton>("Edit", x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Editbtn = std::make_unique<uiButton>(Names[1], x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Editbtn->SetCallback([=]() { FX_INFO("Clicked \"Edit\""); });
 		m_Buttons.push_back(std::move(Editbtn));
 		x += 80;
 
 		// View
-		auto Viewbtn = std::make_unique<uiButton>("View", x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Viewbtn = std::make_unique<uiButton>(Names[2], x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Viewbtn->SetCallback([=]() { FX_INFO("Clicked \"View\""); });
 		m_Buttons.push_back(std::move(Viewbtn));
 		x += 80;
 
 		// Project
-		auto Projectbtn = std::make_unique<uiButton>("Project", x, y, 90, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Projectbtn = std::make_unique<uiButton>(Names[3], x, y, 90, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Projectbtn->SetCallback([=]() { FX_INFO("Clicked \"Project\""); });
 		m_Buttons.push_back(std::move(Projectbtn));
 		x += 100;
 
 		// Build
-		auto Buildbtn = std::make_unique<uiButton>("Build", x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Buildbtn = std::make_unique<uiButton>(Names[4], x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Buildbtn->SetCallback([=]() { FX_INFO("Clicked \"Build\""); });
 		m_Buttons.push_back(std::move(Buildbtn));
 		x += 85;
 
 		// Debug
-		auto Debugbtn = std::make_unique<uiButton>("Debug", x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Debugbtn = std::make_unique<uiButton>(Names[5], x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Debugbtn->SetCallback([=]() { FX_INFO("Clicked \"Debug\""); });
 		m_Buttons.push_back(std::move(Debugbtn));
 		x += 85;
 
 		// Tools
-		auto Toolsbtn = std::make_unique<uiButton>("Tools", x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Toolsbtn = std::make_unique<uiButton>(Names[6], x, y, 75, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Toolsbtn->SetCallback([=]() { FX_INFO("Clicked \"Tools\""); });
 		m_Buttons.push_back(std::move(Toolsbtn));
 		x += 85;
 
 		// Help
-		auto Helpbtn = std::make_unique<uiButton>("Help", x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
+		auto Helpbtn = std::make_unique<uiButton>(Names[7], x, y, 70, buttonHeight, ButtonStyles::NoBackgroundOrLine);
 		Helpbtn->SetCallback([=]() { FX_INFO("Clicked \"Help\""); });
 		m_Buttons.push_back(std::move(Helpbtn));
 		x += 80;
@@ -103,7 +118,7 @@ namespace Frostnux
 				btn->SetCallback([=]() { FX_INFO("Clicked \"Search\"."); });
 				m_Buttons.push_back(std::move(btn));
 			};
-		addSearchButton("Search...", 150);
+		addSearchButton(Names[8], 150);
 	}
 
 	void uiTitleBar::OnDetach()

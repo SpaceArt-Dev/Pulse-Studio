@@ -48,10 +48,15 @@ namespace Frostnux {
 			LanguageManager::GetLanguageName(),
 			s_Version);
 
-		std::string WindowName = "Frostnux - " + s_Version;
+		std::string path = "Resources/Languages/" + LanguageManager::GetLanguageCode() + ".json";
+		std::ifstream file(path);
+		nlohmann::json j;
+		file >> j;
+		std::string Name = j.value("Name", "Frostnux");
+		std::string WindowName = Name + " - " + s_Version;
 		if (ChannelManager::GetChannel() == Channel::Preview)
 		{
-			WindowName += " [Preview]";
+			WindowName += " [" + j.value("Preview", "Preview") + "]";
 		}
 		float width = settings.WindowWidth, height = settings.WindowHeight;
 		if (width <= 0 || height <= 0)

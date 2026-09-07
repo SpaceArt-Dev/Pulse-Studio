@@ -1,4 +1,43 @@
 {
-    "Language" : "Русский",
-    "LanguageCode" : "ru-RU"
+	"Name": "Остров",
+	"Preview": "Предпросмотр",
+	"Current": "Текущий",
+	"Language": "Русский",
+	"LanguageCode": "ru-RU",
+
+	"File": "Файл",
+	"Edit": "Редактировать",
+	"View": "Вид",
+	"Project": "Проект",
+	"Build": "Сборка",
+	"Debug": "Отладка",
+	"Tools": "Инструменты",
+	"Help": "Помощь",
+	"Search": "Поиск",
+
+	"NewFile": "Новый файл",
+	"OpenFile": "Открыть файл",
+	"SaveFile": "Сохранить файл",
+	"SaveAs": "Сохранить как",
+	"SaveAllFiles": "Сохранить все файлы",
+
+	"Undo": "Отменить",
+	"Redo": "Повторить",
+	"Cut": "Вырезать",
+	"Copy": "Копировать",
+	"Paste": "Вставить",
+
+	"Rebuild": "Перестроить",
+	"Clean": "Очистить",
+	"Run": "Запустить",
+
+	"FindBookmark": "Найти закладку",
+	"AddBookmark": "Добавить закладку",
+	"DeleteBookmark": "Удалить закладку",
+	"NextBookmark": "Следующая закладка",
+	"ClearBookmarks": "Очистить закладки",
+
+	"Ready": "Готово",
+	"Building...": "Сборка...",
+	"Saving File...": "Сохранение файла..."
 }

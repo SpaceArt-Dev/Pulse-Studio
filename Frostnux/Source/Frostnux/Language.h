@@ -28,6 +28,18 @@ namespace Frostnux {
 			default: return "Unknown";
 			}
 		}
+		static std::string GetLanguageCode()
+		{
+			switch (s_CurrentLanguageType)
+			{
+			case LanguageType::en_US: return "en-US";
+			case LanguageType::zh_CN: return "zh-CN";
+			case LanguageType::ru_RU: return "ru-RU";
+			case LanguageType::fr_FR: return "fr-FR";
+			case LanguageType::es_ES: return "es-ES";
+			default: return "unknown";
+			}
+		}
 	private:
 		LanguageManager() = default;
 

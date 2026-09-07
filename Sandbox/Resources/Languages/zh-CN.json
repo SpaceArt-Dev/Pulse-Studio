@@ -1,4 +1,43 @@
 {
-    "Language": "中文",
-    "LanguageCode": "zh-CN"
+	"Name": "霜砧",
+	"Preview": "预览版",
+	"Current": "稳定版",
+	"Language": "中文",
+	"LanguageCode": "zh-CN",
+
+	"File": "文件",
+	"Edit": "编辑",
+	"View": "查看",
+	"Project": "项目",
+	"Build": "编译",
+	"Debug": "调试",
+	"Tools": "工具",
+	"Help": "帮助",
+	"Search": "搜索",
+
+	"NewFile": "新文件",
+	"OpenFile": "打开文件",
+	"SaveFile": "保存文件",
+	"SaveAs": "另存为",
+	"SaveAllFiles": "保存所有文件",
+
+	"Undo": "撤销",
+	"Redo": "重做",
+	"Cut": "剪切",
+	"Copy": "复制",
+	"Paste": "粘贴",
+
+	"Rebuild": "重建",
+	"Clean": "清理",
+	"Run": "运行",
+
+	"FindBookmark": "查找书签",
+	"AddBookmark": "添加书签",
+	"DeleteBookmark": "删除书签",
+	"NextBookmark": "下一个书签",
+	"ClearBookmarks": "清除所有书签",
+
+	"Ready": "就绪",
+	"Building...": "正在编译...",
+	"Saving File...": "正在保存文件..."
 }

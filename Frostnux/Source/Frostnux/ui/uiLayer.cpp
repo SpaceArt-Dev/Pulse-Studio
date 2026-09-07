@@ -43,8 +43,13 @@ namespace Frostnux {
 
 		m_CodeEditor = new CodeEditor("");
 
+		std::string path = "Resources/Languages/" + LanguageManager::GetLanguageCode() + ".json";
+		std::ifstream file(path);
+		nlohmann::json j;
+		file >> j;
 		m_StatusBar = new uiStatusBar();
 		m_StatusBar->OnAttach();
+		m_StatusBar->SetStatusText(j.value("Ready", "Ready"));
 
 		m_TitleBar = new uiTitleBar();
 		m_TitleBar->OnAttach();
@@ -53,34 +58,35 @@ namespace Frostnux {
 		m_ShortcutBar->OnAttach();
 		std::vector<ShortcutItem> fileGroup =
 		{
-			{ "new", "N", "New File", []() { FX_INFO("New File"); } },
-			{ "open", "O", "Open File...", []() { FX_INFO("Open File"); } },
-			{ "save", "S", "Save File", []() { FX_INFO("Save File"); } },
-			{ "saveall", "SA", "Save All Files", []() { FX_INFO("Save All"); } }
+			{ "new", "N", j.value("NewFile", "New File"), []() { FX_INFO("New File"); }},
+			{ "open", "O", j.value("OpenFile", "Open File"), []() { FX_INFO("Open File"); } },
+			{ "save", "S", j.value("SaveFile", "Save File"), []() { FX_INFO("Save File"); } },
+			{ "saveas", "SA", j.value("SaveAs", "Save As"), []() { FX_INFO("Save As"); } },
+			{ "saveall", "SA", j.value("SaveAllFiles", "Save All Files"), []() { FX_INFO("Save All"); } }
 		};
 		std::vector<ShortcutItem> editGroup =
 		{
-			{ "undo", "U", "Undo", []() { FX_INFO("Undo"); }},
-			{ "redo", "R", "Redo", []() { FX_INFO("Redo"); } },
-			{ "cut", "Ct", "Cut", []() { FX_INFO("Cut"); } },
-			{ "copy", "Co", "Copy", []() { FX_INFO("Copy"); } },
-			{ "paste", "P", "Paste", []() { FX_INFO("Paste"); } }
+			{ "undo", "U", j.value("Undo", "Undo"), []() { FX_INFO("Undo"); }},
+			{ "redo", "R", j.value("Redo", "Redo"), []() { FX_INFO("Redo"); } },
+			{ "cut", "Ct", j.value("Cut", "Cut"), []() { FX_INFO("Cut"); }},
+			{ "copy", "Co", j.value("Copy", "Copy"), []() { FX_INFO("Copy"); } },
+			{ "paste", "P", j.value("Paste", "Paste"), []() { FX_INFO("Paste"); } }
 		};
 		std::vector<ShortcutItem> buildGroup =
 		{
-			{ "debug", "D", "Debug", []() { FX_INFO("Debug"); } },
-			{ "build", "B", "Build", []() { FX_INFO("Start Build."); } },
-			{ "rebuild", "RB", "Rebuild", []() { FX_INFO("Start Rebuild"); } },
-			{ "clean", "Cl", "Clean", []() { FX_INFO("Clean"); } },
-			{ "run", "R", "Run", []() { FX_INFO("Run"); } }
+			{ "debug", "D", j.value("Debug", "Debug"), []() { FX_INFO("Debug"); } },
+			{ "build", "B", j.value("Build", "Build"), []() { FX_INFO("Start Build."); } },
+			{ "rebuild", "RB", j.value("Rebuild", "Rebuild"), []() { FX_INFO("Start Rebuild"); } },
+			{ "clean", "Cl", j.value("Clean", "Clean"), []() { FX_INFO("Clean"); } },
+			{ "run", "R", j.value("Run", "Run"), []() { FX_INFO("Run"); } }
 		};
 		std::vector<ShortcutItem> bookmarkGroup =
 		{
-			{ "findbookmark", "FB", "Find Bookmark", []() { FX_INFO("Find Bookmark"); } },
-			{ "addbookmark", "AB", "Add Bookmark", []() { FX_INFO("Add Bookmark"); } },
-			{ "deletebookmark", "DB", "Delete Bookmark", []() { FX_INFO("Delete Bookmark"); } },
-			{ "nextbookmark", "NB", "Next Bookmark", []() { FX_INFO("Next Bookmark"); } },
-			{ "clearbookmarks", "CB", "Clear Bookmarks", []() { FX_INFO("Clear Bookmarks"); } }
+			{ "findbookmark", "FB", j.value("FindBookmark", "Find Bookmark"), []() { FX_INFO("Find Bookmark"); } },
+			{ "addbookmark", "AB", j.value("AddBookmark", "Add Bookmark"), []() { FX_INFO("Add Bookmark"); } },
+			{ "deletebookmark", "DB", j.value("DeleteBookmark", "Delete Bookmark"), []() { FX_INFO("Delete Bookmark"); } },
+			{ "nextbookmark", "NB", j.value("NextBookmark", "Next Bookmark"), []() { FX_INFO("Next Bookmark"); } },
+			{ "clearbookmarks", "CB", j.value("ClearBookmarks", "Clear Bookmarks"), []() { FX_INFO("Clear Bookmarks"); } }
 		};
 		m_ShortcutBar->AddGroup(fileGroup, true);
 		m_ShortcutBar->AddGroup(editGroup, true);

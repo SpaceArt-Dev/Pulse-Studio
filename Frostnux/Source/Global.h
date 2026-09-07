@@ -3,7 +3,7 @@
 namespace Frostnux {
 
 	static std::string s_RootPath = "H:/Programming/Projects/CppProject/HighPrecisionComputing";
-	static std::string s_Version = "2026.2.2"; // "yyyy.a.b.c" => yyyy 年中的 a 个大版本更新中的第 b 个小补丁.
+	static std::string s_Version = "2026.3.1"; // "yyyy.a.b.c" => yyyy 年中的 a 个大版本更新中的第 b 个小补丁.
 	static float s_FontSize = 20.0f;
 	static bool s_FontLoaded = false;
 

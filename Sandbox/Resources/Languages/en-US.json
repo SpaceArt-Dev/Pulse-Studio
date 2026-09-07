@@ -1,4 +1,43 @@
 {
-    "Language" : "English",
-    "LanguageCode" : "en-US"
+	"Name": "Frostnux",
+	"Preview": "Preview",
+	"Current": "Current",
+	"Language": "English",
+	"LanguageCode": "en-US",
+
+	"File": "File",
+	"Edit": "Edit",
+	"View": "View",
+	"Project": "Project",
+	"Build": "Build",
+	"Debug": "Debug",
+	"Tools": "Tools",
+	"Help": "Help",
+	"Search": "Search",
+
+	"NewFile": "New File",
+	"OpenFile": "Open File",
+	"SaveFile": "Save File",
+  "SaveAs": "Save As",
+	"SaveAllFiles": "Save All Files",
+
+	"Undo": "Undo",
+	"Redo": "Redo",
+	"Cut": "Cut",
+	"Copy": "Copy",
+	"Paste": "Paste",
+
+	"Rebuild": "Rebuild",
+	"Clean": "Clean",
+	"Run": "Run",
+
+	"FindBookmark": "Find Bookmark",
+	"AddBookmark": "Add Bookmark",
+	"DeleteBookmark": "Delete Bookmark",
+	"NextBookmark": "Next Bookmark",
+	"ClearBookmarks": "Clear Bookmarks",
+
+	"Ready": "Ready",
+	"Building...": "Building...",
+  "Saving File...": "Saving File..."
 }
